@@ -43,7 +43,10 @@ llm = ChatGroq(
     model="llama-3.3-70b-versatile",
     api_key=os.environ["GROQ_API_KEY"]
 )
-search_tool = TavilySearch(max_results=3)
+search_tool = TavilySearch(
+    max_results=3,
+    tavily_api_key=os.environ["TAVILY_API_KEY"]  # ← explicitly pass karo
+)
 
 
 # -----------------------------
