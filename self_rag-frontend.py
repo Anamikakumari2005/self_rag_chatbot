@@ -320,7 +320,7 @@ if query:
     with st.spinner("🧠 Self-RAG soch raha hai..."):
         # chat_history mat bhejo — LangGraph MongoDB se khud load karega
         initial_state = {
-            "question": query,  # ← sirf current question
+            "question": question_with_history,  # ← sirf current question
             "retrieval_query": query,
             "rewrite_tries": 0,
             "docs": [],
