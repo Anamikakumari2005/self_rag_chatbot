@@ -317,6 +317,11 @@ if query:
         for m in recent_messages
     ])
 
+    question_with_history = (
+    f"Conversation History:\n{chat_history}\n\nCurrent Question: {query}"
+    if chat_history else query
+    )
+      
     with st.spinner("🧠 Self-RAG soch raha hai..."):
         # chat_history mat bhejo — LangGraph MongoDB se khud load karega
         initial_state = {
