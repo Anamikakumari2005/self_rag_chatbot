@@ -19,10 +19,21 @@ from langgraph.checkpoint.mongodb import MongoDBSaver
 from pymongo import MongoClient
 
 
-os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY") or st.secrets.get("GROQ_API_KEY", "")
-os.environ["TAVILY_API_KEY"] = os.getenv("TAVILY_API_KEY") or st.secrets.get("TAVILY_API_KEY", "")
-os.environ["MONGODB_URI"] = os.getenv("MONGODB_URI") or st.secrets.get("MONGODB_URI", "")
-os.environ["HF_TOKEN"] = os.getenv("HF_TOKEN") or st.secrets.get("HF_TOKEN", "")
+def get_secret(key: str) -> str:
+    # Pehle environment se try karo
+    val = os.getenv(key, "")
+    if val:
+        return val
+    # Phir st.secrets se try karo
+    try:
+        return st.secrets[key]
+    except:
+        return ""
+
+os.environ["GROQ_API_KEY"] = get_secret("GROQ_API_KEY")
+os.environ["TAVILY_API_KEY"] = get_secret("TAVILY_API_KEY")
+os.environ["MONGODB_URI"] = get_secret("MONGODB_URI")
+os.environ["HF_TOKEN"] = get_secret("HF_TOKEN")
 
 
 # -----------------------------
