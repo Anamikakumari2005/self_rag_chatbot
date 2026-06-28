@@ -225,7 +225,7 @@ with st.sidebar:
     st.markdown("### 🔗 Session Link")
     session_url = f"http://localhost:8501/?user_id={user_id}"
     st.code(session_url)
-    st.caption("Save karo — wapas aane pe same chat milega!")
+    st.caption("Save this link — your chat will be restored when you come back!")
 
     if st.button("🗑️ Clear Chat", use_container_width=True):
         st.session_state.chats[st.session_state.active_chat] = []
@@ -294,7 +294,7 @@ with col_chat:
     chat_container = st.container(height=450)
     with chat_container:
         if not messages:
-            st.markdown("*Query poocho — PDF upload karo!*")
+            st.markdown("* Ask Query —  upload your PDFs!*")
         for msg in messages:
             if msg["role"] == "user":
                 st.markdown(f'<div class="chat-user">👤 {msg["content"]}</div>',
@@ -322,7 +322,7 @@ if query:
     if chat_history else query
     )
       
-    with st.spinner("🧠 Self-RAG soch raha hai..."):
+    with st.spinner("🧠 Self-RAG thinking..."):
         # chat_history mat bhejo — LangGraph MongoDB se khud load karega
         initial_state = {
             "question": question_with_history,  # ← sirf current question
@@ -424,4 +424,4 @@ with col_info:
                             unsafe_allow_html=True)
     else:
         st.markdown("### 📊 Stats")
-        st.info("Pehla question poochho — stats yahan dikhenge!")
+        st.info("Ask your first question!")
