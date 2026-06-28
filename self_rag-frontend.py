@@ -310,9 +310,11 @@ if query:
     messages.append({"role": "user", "content": query})
     st.session_state.total_queries += 1
 
+    recent_messages = messages[-4:-1] if len(messages) > 3 else messages[:-1]
+
     chat_history = "\n".join([
-        f"{m['role'].upper()}: {m['content']}"
-        for m in messages[:-1]
+        f"{m['role'].upper()}: {m['content'][:150]}"
+        for m in recent_messages
     ])
 
     with st.spinner("🧠 Self-RAG soch raha hai..."):

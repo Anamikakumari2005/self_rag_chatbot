@@ -527,11 +527,16 @@ rewrite_for_retrieval_prompt = ChatPromptTemplate.from_messages([
 rewrite_llm = llm.with_structured_output(RewriteDecision)
 
 def rewrite_question(state: State):
+    # Question truncate karo agar bahut lamba hai
+    question = state["question"]
+    if len(question) > 500:
+        question = question[-500:]  # sirf last 500 chars
+    
     decision: RewriteDecision = rewrite_llm.invoke(
         rewrite_for_retrieval_prompt.format_messages(
-            question=state["question"],
+            question=question,
             retrieval_query=state.get("retrieval_query", ""),
-            answer=state.get("answer", ""),
+            answer=state.get("answer", "")[:200],  # answer bhi truncate
         )
     )
     return {
