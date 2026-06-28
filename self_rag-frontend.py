@@ -365,6 +365,22 @@ if query:
             "successful_queries": st.session_state.successful_queries,
             "pdf_names": st.session_state.pdf_names,
         })
+    with chat_container:
+        st.markdown(f'<div class="chat-user">👤 {query}</div>', unsafe_allow_html=True)
+        placeholder = st.empty()
+        displayed = ""
+        import time
+        for word in answer.split():
+            displayed += word + " "
+            placeholder.markdown(
+                f'<div class="chat-bot">🧠 {displayed}▌</div>',
+                unsafe_allow_html=True
+            )
+            time.sleep(0.03)
+        placeholder.markdown(
+            f'<div class="chat-bot">🧠 {displayed}</div>',
+            unsafe_allow_html=True
+        )        
         st.rerun()
 
 # ── RIGHT: Stats ──────────────────────────────────────
