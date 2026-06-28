@@ -41,7 +41,7 @@ os.environ["HF_TOKEN"] = get_secret("HF_TOKEN")
 # -----------------------------
 llm = ChatGroq(
     model="llama-3.3-70b-versatile",
-    api_key=os.environ("GROQ_API_KEY")
+    api_key=os.environ["GROQ_API_KEY"]
 )
 search_tool = TavilySearch(max_results=3)
 
